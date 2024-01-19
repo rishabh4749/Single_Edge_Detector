@@ -20,22 +20,18 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module edge_detector(
+module des (
     input clk,
     input [7:0] in,
-    output reg [7:0] pedge
-    );
-    reg temp;
-    always @ (posedge clk) begin
-    if(pedge!=0)
-    pedge<=0;
-    else begin
-    if(temp==in)
-    pedge<=0;
-    else begin
-    pedge<=in;
+    output [7:0] pedge
+);
+
+    reg [7:0] temp;
+    
+    always @ (posedge clk)
+    begin
+    temp <= in;
+    pedge <= ~temp & in;
     end
-    end
-    temp<=in;
-    end
+    
 endmodule
